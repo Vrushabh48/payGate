@@ -1,2 +1,2 @@
-# paytm
-Building a basic version of PayTM
+# payGate
+Building a basic version of PayTM type application
