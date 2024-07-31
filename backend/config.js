@@ -1,4 +1,3 @@
-
-module.export = {
-    JWT_SECRET : "jwt12345678"
+module.exports = {
+	JWT_SECRET: "123456"
 }
