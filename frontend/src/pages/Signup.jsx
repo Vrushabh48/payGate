@@ -1,0 +1,48 @@
+import { useState } from "react";
+import Heading from "../Components/Heading";
+import Inputbox from "../Components/Inputbox";
+import { useNavigate } from "react-router-dom";
+import Button from "../Components/Button";
+import axios from "axios"
+
+export default function Signup(){
+    const [firstName, setfirstName] = useState("");
+    const [lastName, setlastName] = useState("");
+    const [username, setusername] = useState("");
+    const [password, setpassword] = useState("");
+    const navigate = useNavigate();
+    
+
+    return(
+        <div>
+            <Heading label={"Sign up"}/>
+            <Inputbox label={"First Name"} placeholder={"name"} onChange={(e) => {
+                setfirstName(e.target.value)
+            }}/>
+            <Inputbox label={"Last Name"} placeholder={"name"} onChange={(e) => {
+                setlastName(e.target.value);
+            }}/>
+            <Inputbox label={"Username"} placeholder={"name"} onChange={(e) => {
+                setusername(e.target.value)
+            }}/>
+            <Inputbox label={"Password"} placeholder={"name"} onChange={(e) => {
+                setpassword(e.target.value)
+            }}/>
+           <Button onclick={async () => {
+           axios.post('http://localhost:3000/api/v1/user/signup', {
+            firstname: firstName,
+            lastname: lastName,
+            username: username,
+            password: password
+          })
+          .then(function (response) {
+            localStorage.setItem("token",response.data.token)
+            navigate("/dashboard")
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+          }} label={"Sign up"} />
+        </div>
+    )
+}
